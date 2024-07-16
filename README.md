@@ -3,7 +3,7 @@
 
 - 🔭 I’m currently working on **NEXBEEM**
 
-- 🌱 I’m currently learning **Courses,HTML,CSS,JS**
+- 🌱 I’m currently learning **HTML,CSS,JS,Ai training**
 
 - 🤝 I’m looking for help with **NEXBEEM**
 
