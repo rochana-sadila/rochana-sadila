@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Rochana Sadila - Portfolio</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+</head>
+<body>
+  <canvas id="bg"></canvas>
+  <div id="loading-screen">
+    <div class="loader"></div>
+    Loading Portfolio...
+  </div>
+  <div id="cursor"></div>
+  <header id="header">
+    <img id="avatar" src="" alt="Avatar" />
+    <h1 id="name"></h1>
+    <div id="typed"></div>
+    <p id="bio"></p>
+    <a id="github-link" href="#" target="_blank">GitHub Profile</a>
+  </header>
+  <section>
+    <h2>Repositories</h2>
+    <ul id="repo-list"><li>Loading...</li></ul>
+  </section>
+  <section>
+    <h2>Skills</h2>
+    <div id="skills">
+      <div class="skill"><div class="skill-name">JavaScript</div><div class="skill-bar"><div class="skill-fill"></div></div></div>
+      <div class="skill"><div class="skill-name">HTML & CSS</div><div class="skill-bar"><div class="skill-fill"></div></div></div>
+      <div class="skill"><div class="skill-name">Node.js</div><div class="skill-bar"><div class="skill-fill"></div></div></div>
+    </div>
+  </section>
+  <section>
+    <h2>GitHub Contribution Graph</h2>
+    <img src="https://github-readme-activity-graph.vercel.app/graph?username=rochana-sadila&theme=github-compact" alt="GitHub Contribution Graph" />
+  </section>
+  <script src="script.js"></script>
+</body>
+</html>
