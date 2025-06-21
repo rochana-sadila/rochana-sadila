@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Rochana Sadila - Portfolio</title>
+
+  <style>
+    /* === Animated Background === */
+    body {
+      margin: 0; padding: 0;
+      background: #0d1117;
+      color: #c9d1d9;
+      font-family: system-ui, sans-serif;
+      max-width: 900px;
+      margin-left: auto;
+      margin-right: auto;
+      padding: 2rem;
+      overflow-x: hidden;
+      position: relative;
+      cursor: none;
+      transition: background-color 0.5s ease, color 0.5s ease;
+      min-height: 100vh;
+      background: linear-gradient(-45deg, #0d1117, #161b22, #0d1117, #161b22);
+      background-size: 400% 400%;
+      animation: gradientBG 15s ease infinite;
+    }
+    @keyframes gradientBG {
+      0% {background-position: 0% 50%;}
+      50% {background-position: 100% 50%;}
+      100% {background-position: 0% 50%;}
+    }
+
+    canvas#bg {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      z-index: -1;
+    }
+
+    @media (prefers-color-scheme: light) {
+      body {
+        background: linear-gradient(-45deg, #f0f6fc, #d1d5da, #f0f6fc, #d1d5da);
+        color: #24292f;
+      }
+      header, section {
+        background: #f6f8faee;
+        color: #24292f;
+      }
+      #cursor {
+        background: rgba(0,0,0,0.5);
+        mix-blend-mode: normal;
+      }
+    }
+
+    a { color: #58a6ff; }
+
+    header, section {
+      background: #161b22ee;
+      border-radius: 12px;
+      padding: 1.5rem;
+      margin-bottom: 2rem;
+      backdrop-filter: blur(4px);
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    h1, h2 { color: #f0f6fc; }
+    ul {
+      list-style: none;
+      padding: 0;
+    }
+    #repo-list li {
+      background: #0d1117dd;
+      border-radius: 8px;
+      margin-bottom: 0.7rem;
+      padding: 0.8rem;
+      box-shadow: 0 0 10px #00000044;
+      opacity: 0;
+      transform: translateY(10px);
+      transition: all 0.3s;
+    }
+    #skills {
+      margin-top: 1rem;
+    }
+    .skill {
+      margin-bottom: 1rem;
+    }
+    .skill-name {
+      margin-bottom: 0.3rem;
+      font-weight: 600;
+    }
+    .skill-bar {
+      background: #222;
+      width: 100%;
+      height: 12px;
+      border-radius: 6px;
+      overflow: hidden;
+    }
+    .skill-fill {
+      background: #58a6ff;
+      height: 100%;
+      width: 0;
+    }
+    #typed {
+      font-weight: 600;
+      font-size: 1.2rem;
+      color: #58a6ff;
+      min-height: 30px;
+      margin-top: 0.3rem;
+    }
+    #cursor {
+      position: fixed;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: rgba(88,166,255,0.7);
+      pointer-events: none;
+      transform: translate(-50%, -50%);
+      transition: transform 0.1s ease, background 0.3s ease;
+      z-index: 9999;
+      mix-blend-mode: difference;
+    }
+    #loading-screen {
+      position: fixed;
+      inset: 0;
+      background: #0d1117;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 10000;
+      color: #58a6ff;
+      font-size: 1.5rem;
+      font-weight: 700;
+      user-select: none;
+    }
+    .loader {
+      border: 6px solid #222;
+      border-top: 6px solid #58a6ff;
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      animation: spin 1s linear infinite;
+      margin-right: 1rem;
+    }
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+  </style>
+
+  <!-- Anime.js -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+  <!-- Typed.js -->
+  <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+</head>
+<body>
+  <canvas id="bg"></canvas>
+
+  <div id="loading-screen">
+    <div class="loader"></div>
+    Loading Portfolio...
+  </div>
+
+  <div id="cursor"></div>
+
+  <header id="header">
+    <img id="avatar" src="" alt="Avatar" style="width:100px;border-radius:50%;" />
+    <h1 id="name"></h1>
+    <div id="typed"></div>
+    <p id="bio"></p>
+    <a id="github-link" href="#" target="_blank">GitHub Profile</a>
+  </header>
+
+  <section>
+    <h2>Repositories</h2>
+    <ul id="repo-list"><li>Loading...</li></ul>
+  </section>
+
+  <section>
+    <h2>Skills</h2>
+    <div id="skills">
+      <div class="skill">
+        <div class="skill-name">JavaScript</div>
+        <div class="skill-bar"><div class="skill-fill"></div></div>
+      </div>
+      <div class="skill">
+        <div class="skill-name">HTML & CSS</div>
+        <div class="skill-bar"><div class="skill-fill"></div></div>
+      </div>
+      <div class="skill">
+        <div class="skill-name">Node.js</div>
+        <div class="skill-bar"><div class="skill-fill"></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>GitHub Contribution Graph</h2>
+    <img
+      src="https://github-readme-activity-graph.vercel.app/graph?username=rochana-sadila&theme=github-compact"
+      alt="GitHub Contribution Graph"
+      style="width: 100%; max-width: 900px; border-radius: 12px; box-shadow: 0 0 15px #007acc88;"
+    />
+  </section>
+
+  <script>
+    const username = 'rochana-sadila';
+
+    window.addEventListener('load', () => {
+      const loading = document.getElementById('loading-screen');
+      loading.style.opacity = '0';
+      setTimeout(() => loading.style.display = 'none', 600);
+    });
+
+    const cursor = document.getElementById('cursor');
+    window.addEventListener('mousemove', e => {
+      cursor.style.left = e.clientX + 'px';
+      cursor.style.top = e.clientY + 'px';
+    });
+    window.addEventListener('mousedown', () => {
+      cursor.style.transform = 'translate(-50%, -50%) scale(0.7)';
+      cursor.style.background = 'rgba(88,166,255,1)';
+    });
+    window.addEventListener('mouseup', () => {
+      cursor.style.transform = 'translate(-50%, -50%) scale(1)';
+      cursor.style.background = 'rgba(88,166,255,0.7)';
+    });
+
+    async function fetchGitHubProfile() {
+      const res = await fetch(`https://api.github.com/users/${username}`);
+      const data = await res.json();
+      document.getElementById('avatar').src = data.avatar_url;
+      document.getElementById('name').textContent = data.name || data.login;
+      document.getElementById('bio').textContent = data.bio || '';
+      document.getElementById('github-link').href = data.html_url;
+
+      new Typed('#typed', {
+        strings: ['Fullstack Developer', 'Open Source Enthusiast', 'Tech Blogger'],
+        typeSpeed: 50,
+        backSpeed: 30,
+        loop: true
+      });
+
+      anime({
+        targets: 'header',
+        translateY: [20, 0],
+        opacity: [0, 1],
+        duration: 1000,
+        easing: 'easeOutExpo'
+      });
+    }
+
+    async function fetchGitHubRepos() {
+      try {
+        const res = await fetch(`https://api.github.com/users/${username}/repos?sort=updated&per_page=1`);
+        if (!res.ok) throw new Error('Repos fetch failed');
+        const repos = await res.json();
+        const repoList = document.getElementById('repo-list');
+        repoList.innerHTML = '';
+
+        repos.forEach((repo, i) => {
+          const li = document.createElement('li');
+          li.innerHTML = `<strong>${repo.name}</strong><br>${repo.description || ''}<br><small>${repo.language || 'N/A'}</small>`;
+          repoList.appendChild(li);
+
+          anime({
+            targets: li,
+            opacity: [0, 1],
+            translateY: [10, 0],
+            delay: i * 300,
+            duration: 800,
+            easing: 'easeOutQuad'
+          });
+        });
+      } catch (e) {
+        document.getElementById('repo-list').innerHTML = '<li>Failed to load repositories.</li>';
+        console.error(e);
+      }
+    }
+
+    function animateSkills() {
+      const fills = document.querySelectorAll('.skill-fill');
+      const widths = ['80%', '90%', '70%'];
+      fills.forEach((fill, i) => {
+        anime({
+          targets: fill,
+          width: ['0%', widths[i] || '50%'],
+          duration: 1500,
+          delay: i * 300,
+          easing: 'easeOutQuad'
+        });
+      });
+    }
+
+    document.querySelectorAll('header, section').forEach(el => {
+      anime({
+        targets: el,
+        opacity: [0, 1],
+        translateY: [20, 0],
+        duration: 1000,
+        delay: 500,
+        easing: 'easeOutExpo'
+      });
+    });
+
+    // Background canvas animation
+    const canvas = document.getElementById('bg');
+    const ctx = canvas.getContext('2d');
+    let particles = [];
+
+    function resizeCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
+
+    function createParticles() {
+      for (let i = 0; i < 100; i++) {
+        particles.push({
+          x: Math.random() * canvas.width,
+          y: Math.random() * canvas.height,
+          radius: Math.random() * 2 + 1,
+          dx: Math.random() - 0.5,
+          dy: Math.random() - 0.5
+        });
+      }
+    }
+
+    function drawParticles() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      ctx.fillStyle = 'rgba(88,166,255,0.5)';
+      particles.forEach(p => {
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+        ctx.fill();
+        p.x += p.dx;
+        p.y += p.dy;
+
+        if (p.x < 0 || p.x > canvas.width) p.dx *= -1;
+        if (p.y < 0 || p.y > canvas.height) p.dy *= -1;
+      });
+      requestAnimationFrame(drawParticles);
+    }
+
+    createParticles();
+    drawParticles();
+
+    fetchGitHubProfile().then(() => {
+      fetchGitHubRepos();
+      animateSkills();
+    });
+  </script>
+</body>
+</html>
