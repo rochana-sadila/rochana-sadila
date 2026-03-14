@@ -1,0 +1,92 @@
+@import url("https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&display=swap");
+
+body {
+  font-family: "Datatype", sans-serif;
+  background-color: #6b7c5a;
+  color: #fff;
+  margin: 0%;
+  overflow: hidden;
+}
+
+canvas {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.vignette {
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(
+    ellipse at center,
+    transparent 40%,
+    rgba(42, 52, 32, 0.55) 100%
+  );
+  pointer-events: none;
+  z-index: 1;
+}
+
+.bio {
+  position: absolute;
+  top: 0;
+  text-align: left;
+  color: #fff;
+  padding: 180px 180px 100px;
+  text-shadow: 0.5px 0.5px 5px #1a1a1a;
+  width: 50vw;
+}
+
+@media (max-width: 768px) {
+  .bio {
+    position: relative;
+    top: 0;
+    padding: 20px;
+    width: 100%;
+    text-align: left;
+  }
+}
+
+.parent-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+a:-webkit-any-link {
+  color: -webkit-link;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.icon {
+  padding: 6px;
+  text-shadow: 0.5px 0.5px 5px #1a1a1a;
+}
+
+/* ── Animations ── */
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.4;
+    transform: scale(0.7);
+  }
+}
